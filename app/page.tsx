@@ -1,8 +1,6 @@
 import { Navigation } from "@/components/portfolio/navigation";
 import { Hero } from "@/components/portfolio/hero";
 import { About } from "@/components/portfolio/about";
-import { Services } from "@/components/portfolio/services";
-import { Skills } from "@/components/portfolio/skills";
 import { Experience } from "@/components/portfolio/experience";
 import { Projects } from "@/components/portfolio/projects";
 import { Education } from "@/components/portfolio/education";
@@ -15,8 +13,6 @@ export default function Portfolio() {
       <Navigation />
       <Hero />
       <About />
-      <Services />
-      <Skills />
       <Experience />
       <Projects />
       <Education />

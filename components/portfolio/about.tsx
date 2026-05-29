@@ -1,73 +1,68 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 export function About() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const stats = [
-    { value: "1+", label: "Year Experience" },
-    { value: "YUBI", label: "Current Company" },
-    { value: "FinOps", label: "Domain Focus" },
-    { value: "Python", label: "Primary Tool" },
-  ];
-
   return (
-    <section id="about" ref={ref} className="py-32 px-6 md:px-12 lg:px-24">
-      <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="grid lg:grid-cols-2 gap-16 items-start"
+    <section id="about" ref={ref} className="py-24 px-6 md:px-12 lg:px-24 border-t border-border">
+      <div className="max-w-4xl">
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.5 }}
+          className="text-muted-foreground text-sm tracking-wide uppercase mb-8 block"
         >
-          {/* Left column - Text */}
-          <div>
-            <span className="text-primary text-sm font-medium uppercase tracking-widest mb-4 block">
-              About
-            </span>
-            <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">
-              Transforming raw data into{" "}
-              <span className="text-primary">actionable insights</span>
-            </h2>
-            <div className="space-y-6 text-muted-foreground text-lg leading-relaxed">
-              <p>
-                I&apos;m a Data Analyst at Yuverse (YUBI Group), where I specialize in 
-                bank statement analysis, anomaly detection, and HITL AI validation 
-                for FinOps operations.
-              </p>
-              <p>
-                My background combines IT administration with data analytics, giving 
-                me a unique perspective on building robust, automated data pipelines 
-                that drive business decisions.
-              </p>
-              <p>
-                I believe in clean data, clear insights, and the power of automation 
-                to transform how organizations understand their financial operations.
-              </p>
-            </div>
-          </div>
+          About
+        </motion.span>
 
-          {/* Right column - Stats */}
-          <div className="grid grid-cols-2 gap-6">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                className="p-6 bg-card border border-border rounded-xl hover:border-primary/50 transition-colors"
-              >
-                <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
-                  {stat.value}
-                </div>
-                <div className="text-muted-foreground text-sm">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="space-y-6"
+        >
+          <p className="text-2xl md:text-3xl text-foreground font-light leading-relaxed">
+            I specialize in transforming complex financial data into actionable insights 
+            through <span className="text-muted-foreground">bank statement analysis</span>, {" "}
+            <span className="text-muted-foreground">anomaly detection</span>, and{" "}
+            <span className="text-muted-foreground">HITL AI validation</span>.
+          </p>
+
+          <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl">
+            With a background in IT administration and system management, I bring a unique 
+            perspective to data operations - combining technical infrastructure knowledge 
+            with analytical precision to build robust, automated data pipelines.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-16 border-t border-border"
+        >
+          {[
+            { label: "Domain", value: "FinOps" },
+            { label: "Focus", value: "Data Quality" },
+            { label: "Tools", value: "Python, SQL" },
+            { label: "Location", value: "Chennai" },
+          ].map((item, index) => (
+            <motion.div
+              key={item.label}
+              initial={{ opacity: 0, y: 10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.4, delay: 0.3 + index * 0.05 }}
+            >
+              <p className="text-xs text-muted-foreground uppercase tracking-wide mb-2">
+                {item.label}
+              </p>
+              <p className="text-foreground font-medium">{item.value}</p>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>

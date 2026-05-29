@@ -1,34 +1,27 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Building2, Bot, Globe, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 const projects = [
   {
-    icon: Building2,
     title: "Bank Statement Analyzer",
-    tech: ["Python", "Pandas", "Excel", "SQL"],
-    description:
-      "Automated high-volume transaction anomaly detection for credit risk teams. Processes thousands of bank statements to identify irregularities and support underwriting decisions.",
-    highlight: "High-Volume Data Processing",
+    description: "Automated high-volume transaction anomaly detection for credit risk teams. Processes thousands of statements to identify irregularities.",
+    tags: ["Python", "Pandas", "SQL"],
+    year: "2025",
   },
   {
-    icon: Bot,
     title: "HITL AI Validation Pipeline",
-    tech: ["Python", "Excel", "JIRA"],
-    description:
-      "Human-in-the-loop AI review system ensuring output accuracy in FinOps. Validates AI-generated insights against ground truth data for quality assurance.",
-    highlight: "AI Quality Assurance",
+    description: "Human-in-the-loop AI review system ensuring output accuracy in FinOps. Validates AI-generated insights for quality assurance.",
+    tags: ["Python", "Excel", "JIRA"],
+    year: "2025",
   },
   {
-    icon: Globe,
-    title: "Network Infrastructure Overhaul",
-    tech: ["pfSense", "VPN", "DHCP", "DNS"],
-    description:
-      "End-to-end network redesign achieving 20% faster incident resolution. Implemented robust firewall rules, VPN access, and network monitoring systems.",
-    highlight: "20% Faster Resolution",
+    title: "Network Infrastructure Redesign",
+    description: "End-to-end network overhaul achieving 20% faster incident resolution. Implemented robust firewall rules and monitoring.",
+    tags: ["pfSense", "VPN", "DNS"],
+    year: "2024",
   },
 ];
 
@@ -37,57 +30,54 @@ export function Projects() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="projects" ref={ref} className="py-32 px-6 md:px-12 lg:px-24">
-      <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="mb-16"
+    <section id="projects" ref={ref} className="py-24 px-6 md:px-12 lg:px-24 border-t border-border">
+      <div className="max-w-4xl">
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.5 }}
+          className="text-muted-foreground text-sm tracking-wide uppercase mb-8 block"
         >
-          <span className="text-primary text-sm font-medium uppercase tracking-widest mb-4 block">
-            Work
-          </span>
-          <h2 className="text-4xl md:text-5xl font-bold">
-            Featured Projects
-          </h2>
-        </motion.div>
+          Projects
+        </motion.span>
 
-        <div className="grid lg:grid-cols-3 gap-6">
+        <div className="space-y-0">
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
-              className="group relative p-8 bg-card border border-border rounded-2xl hover:border-primary/50 transition-all duration-300 flex flex-col"
+              className="group py-8 border-b border-border last:border-b-0"
             >
-              <div className="flex items-start justify-between mb-6">
-                <div className="p-3 bg-primary/10 rounded-xl">
-                  <project.icon className="w-6 h-6 text-primary" />
+              <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-8">
+                <div className="md:w-20 shrink-0">
+                  <span className="text-sm text-muted-foreground">{project.year}</span>
                 </div>
-                <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
-              </div>
-              
-              <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded-full w-fit mb-4">
-                {project.highlight}
-              </span>
-              
-              <h3 className="text-xl font-semibold mb-3">{project.title}</h3>
-              
-              <p className="text-muted-foreground mb-6 leading-relaxed flex-grow">
-                {project.description}
-              </p>
-              
-              <div className="flex flex-wrap gap-2 mt-auto">
-                {project.tech.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-3 py-1 text-xs bg-secondary text-muted-foreground rounded-full"
-                  >
-                    {tech}
-                  </span>
-                ))}
+                
+                <div className="flex-1">
+                  <div className="flex items-start justify-between mb-2">
+                    <h3 className="text-xl font-medium text-foreground">
+                      {project.title}
+                    </h3>
+                    <ArrowUpRight className="w-5 h-5 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                  
+                  <p className="text-muted-foreground mb-4 leading-relaxed">
+                    {project.description}
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-xs px-3 py-1 bg-secondary text-secondary-foreground rounded"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
             </motion.div>
           ))}

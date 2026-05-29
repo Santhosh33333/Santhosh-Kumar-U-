@@ -5,44 +5,36 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="py-12 px-6 md:px-12 lg:px-24 border-t border-border">
-      <div className="max-w-6xl mx-auto">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-2">
-            <span className="text-xl font-bold text-foreground tracking-tight">
-              SK<span className="text-primary">.</span>
-            </span>
-            <span className="text-muted-foreground text-sm">
-              | Santhosh Kumar U
-            </span>
-          </div>
+    <footer className="py-8 px-6 md:px-12 lg:px-24 border-t border-border">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+        <p className="text-sm text-muted-foreground">
+          {new Date().getFullYear()} Santhosh Kumar U. All rights reserved.
+        </p>
 
-          <div className="flex items-center gap-4">
-            <Link
-              href="https://linkedin.com/in/santhosh-kumar-u-22a3971b4"
-              target="_blank"
-              className="p-2 text-muted-foreground hover:text-primary hover:bg-card rounded-lg transition-all"
-            >
-              <Linkedin className="w-5 h-5" />
-            </Link>
-            <Link
-              href="mailto:santhoshkrishna958@gmail.com"
-              className="p-2 text-muted-foreground hover:text-primary hover:bg-card rounded-lg transition-all"
-            >
-              <Mail className="w-5 h-5" />
-            </Link>
-            <Link
-              href="https://github.com/santhoshkumar-u"
-              target="_blank"
-              className="p-2 text-muted-foreground hover:text-primary hover:bg-card rounded-lg transition-all"
-            >
-              <Github className="w-5 h-5" />
-            </Link>
-          </div>
-
-          <p className="text-xs text-muted-foreground">
-            {new Date().getFullYear()} Santhosh Kumar U
-          </p>
+        <div className="flex items-center gap-6">
+          <Link
+            href="https://linkedin.com/in/santhosh-kumar-u-22a3971b4"
+            target="_blank"
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-2"
+          >
+            <Linkedin className="w-4 h-4" />
+            LinkedIn
+          </Link>
+          <Link
+            href="https://github.com/santhoshkumar-u"
+            target="_blank"
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-2"
+          >
+            <Github className="w-4 h-4" />
+            GitHub
+          </Link>
+          <Link
+            href="mailto:santhoshkrishna958@gmail.com"
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-2"
+          >
+            <Mail className="w-4 h-4" />
+            Email
+          </Link>
         </div>
       </div>
     </footer>
