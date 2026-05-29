@@ -11,7 +11,7 @@ const skillCategories = [
   },
   {
     title: "Data & Automation",
-    skills: ["Excel", "Pandas", "Google Sheets", "NumPy"],
+    skills: ["Excel", "Pandas", "NumPy", "Google Sheets"],
   },
   {
     title: "IT & Networking",
@@ -28,16 +28,21 @@ export function Skills() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="skills" className="py-24 px-6 md:px-12 lg:px-24" ref={ref}>
+    <section id="skills" ref={ref} className="py-32 px-6 md:px-12 lg:px-24">
       <div className="max-w-6xl mx-auto">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-sm font-mono text-primary mb-12 tracking-wide"
+          className="mb-16"
         >
-          TECH STACK
-        </motion.h2>
+          <span className="text-primary text-sm font-medium uppercase tracking-widest mb-4 block">
+            Tech Stack
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold">
+            Skills & Tools
+          </h2>
+        </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {skillCategories.map((category, categoryIndex) => (
@@ -45,19 +50,23 @@ export function Skills() {
               key={category.title}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
+              transition={{ duration: 0.5, delay: 0.1 + categoryIndex * 0.1 }}
             >
-              <h3 className="text-xs font-mono text-muted-foreground mb-4 uppercase tracking-wider">
+              <h3 className="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-6">
                 {category.title}
               </h3>
-              <div className="flex flex-wrap gap-2">
-                {category.skills.map((skill) => (
-                  <span
+              <div className="space-y-3">
+                {category.skills.map((skill, skillIndex) => (
+                  <motion.div
                     key={skill}
-                    className="px-3 py-1.5 bg-secondary text-secondary-foreground text-sm rounded-md border border-border hover:border-primary/50 transition-colors"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ duration: 0.4, delay: 0.2 + categoryIndex * 0.1 + skillIndex * 0.05 }}
+                    className="group flex items-center gap-3 p-3 bg-card border border-border rounded-lg hover:border-primary/50 hover:bg-card/80 transition-all cursor-default"
                   >
-                    {skill}
-                  </span>
+                    <div className="w-2 h-2 bg-primary rounded-full group-hover:scale-125 transition-transform" />
+                    <span className="text-foreground">{skill}</span>
+                  </motion.div>
                 ))}
               </div>
             </motion.div>

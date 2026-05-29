@@ -3,10 +3,11 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import { Briefcase } from "lucide-react";
 
 const experiences = [
   {
-    period: "Jul 2025 → Present",
+    period: "Jul 2025 - Present",
     role: "Data Analyst",
     subtitle: "Bank Statement Analysis & HITL AI Validation",
     company: "Yuverse (YUBI Group)",
@@ -20,17 +21,17 @@ const experiences = [
     ],
   },
   {
-    period: "2024 → Jun 2025",
+    period: "2024 - Jun 2025",
     role: "IT Administrator & IT Support",
     subtitle: "Assistant Manager",
     company: "Srimukha Precision Technology Pvt. Ltd",
     location: "Chennai",
     current: false,
     highlights: [
-      "Managed pfSense firewall · VPN · NAT · DHCP · DNS",
+      "Managed pfSense firewall, VPN, NAT, DHCP, DNS",
       "Reduced incident resolution time by 20% via SOP redesign",
       "Configured LAN/WLAN switches & optimized network uptime",
-      "Windows OS support · Linux administration · Outlook backup",
+      "Windows OS support, Linux administration, Outlook backup",
     ],
   },
 ];
@@ -40,69 +41,83 @@ export function Experience() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="experience" className="py-24 px-6 md:px-12 lg:px-24 bg-card" ref={ref}>
-      <div className="max-w-4xl mx-auto">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
+    <section id="experience" ref={ref} className="py-32 px-6 md:px-12 lg:px-24 bg-card/50">
+      <div className="max-w-6xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-sm font-mono text-primary mb-12 tracking-wide"
+          className="mb-16"
         >
-          EXPERIENCE
-        </motion.h2>
+          <span className="text-primary text-sm font-medium uppercase tracking-widest mb-4 block">
+            Career
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold">
+            Experience
+          </h2>
+        </motion.div>
 
         <div className="relative">
           {/* Timeline line */}
-          <div className="absolute left-0 top-0 bottom-0 w-px bg-border hidden md:block" />
+          <div className="absolute left-6 top-0 bottom-0 w-px bg-border hidden lg:block" />
 
-          <div className="space-y-12">
+          <div className="space-y-8">
             {experiences.map((exp, index) => (
               <motion.div
-                key={exp.role}
-                initial={{ opacity: 0, x: -20 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="relative md:pl-8"
+                key={exp.role + exp.company}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.1 + index * 0.15 }}
+                className="relative lg:pl-16"
               >
                 {/* Timeline dot */}
                 <div
-                  className={`absolute left-0 top-2 w-2 h-2 rounded-full -translate-x-1/2 hidden md:block ${
-                    exp.current ? "bg-primary" : "bg-muted-foreground"
+                  className={`absolute left-4 top-6 w-5 h-5 rounded-full border-4 border-background hidden lg:flex items-center justify-center ${
+                    exp.current ? "bg-primary" : "bg-muted"
                   }`}
-                />
-
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
-                  <div>
-                    <span className="text-xs font-mono text-muted-foreground">
-                      {exp.period}
-                    </span>
-                    <h3 className="text-xl font-semibold text-foreground mt-1">
-                      {exp.role}
-                      {exp.current && (
-                        <span className="ml-2 px-2 py-0.5 text-xs bg-primary/10 text-primary rounded-full">
-                          Current
-                        </span>
-                      )}
-                    </h3>
-                    <p className="text-sm text-muted-foreground">{exp.subtitle}</p>
-                  </div>
-                  <div className="text-sm text-muted-foreground mt-2 md:mt-0 md:text-right">
-                    <p className="text-foreground">{exp.company}</p>
-                    <p>{exp.location}</p>
-                  </div>
+                >
+                  {exp.current && <div className="w-2 h-2 bg-background rounded-full" />}
                 </div>
 
-                <ul className="space-y-2">
-                  {exp.highlights.map((highlight) => (
-                    <li
-                      key={highlight}
-                      className="text-sm text-muted-foreground flex items-start gap-2"
-                    >
-                      <span className="text-primary mt-1.5">✦</span>
-                      {highlight}
-                    </li>
-                  ))}
-                </ul>
+                <div className="p-6 md:p-8 bg-background border border-border rounded-2xl hover:border-primary/30 transition-all">
+                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
+                    <div>
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="p-2 bg-primary/10 rounded-lg lg:hidden">
+                          <Briefcase className="w-4 h-4 text-primary" />
+                        </div>
+                        <span className="text-sm text-muted-foreground font-medium">
+                          {exp.period}
+                        </span>
+                        {exp.current && (
+                          <span className="px-2 py-1 text-xs bg-primary/10 text-primary rounded-full font-medium">
+                            Current
+                          </span>
+                        )}
+                      </div>
+                      <h3 className="text-xl md:text-2xl font-bold text-foreground mb-1">
+                        {exp.role}
+                      </h3>
+                      <p className="text-muted-foreground">{exp.subtitle}</p>
+                    </div>
+                    <div className="text-left md:text-right">
+                      <p className="text-foreground font-medium">{exp.company}</p>
+                      <p className="text-sm text-muted-foreground">{exp.location}</p>
+                    </div>
+                  </div>
+
+                  <ul className="grid md:grid-cols-2 gap-3">
+                    {exp.highlights.map((highlight) => (
+                      <li
+                        key={highlight}
+                        className="flex items-start gap-3 text-muted-foreground"
+                      >
+                        <span className="w-1.5 h-1.5 bg-primary rounded-full mt-2 shrink-0" />
+                        <span>{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </motion.div>
             ))}
           </div>
