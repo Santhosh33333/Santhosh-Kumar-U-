@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowDown, Linkedin, Mail, MapPin } from "lucide-react";
 import Link from "next/link";
+import { LOOKING_FOR_JOB, PROFILE } from "@/lib/config";
 
 export function Hero() {
   return (
@@ -23,17 +24,19 @@ export function Hero() {
       />
 
       <div className="max-w-5xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mb-6"
-        >
-          <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm text-primary">
-            <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-            Available for opportunities
-          </span>
-        </motion.div>
+        {LOOKING_FOR_JOB && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mb-6"
+          >
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm text-primary">
+              <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+              Open to opportunities
+            </span>
+          </motion.div>
+        )}
 
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
@@ -41,9 +44,9 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6"
         >
-          <span className="text-foreground">Santhosh</span>
+          <span className="text-foreground">{PROFILE.name.split(" ")[0]}</span>
           <br />
-          <span className="text-primary">Kumar U</span>
+          <span className="text-primary">{PROFILE.name.split(" ").slice(1).join(" ")}</span>
         </motion.h1>
 
         <motion.p
@@ -52,7 +55,7 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-xl md:text-2xl text-muted-foreground max-w-2xl mb-8 leading-relaxed"
         >
-          <span className="text-foreground font-medium">Data Analyst</span> at Yuverse (YUBI Group). 
+          <span className="text-foreground font-medium">{PROFILE.role}</span> at {PROFILE.company}. 
           Specializing in FinOps, HITL AI Validation, and Python Automation.
         </motion.p>
 
@@ -63,7 +66,7 @@ export function Hero() {
           className="flex flex-wrap gap-4 mb-12"
         >
           <Link
-            href="https://linkedin.com/in/santhosh-kumar-u-22a3971b4"
+            href={PROFILE.linkedin}
             target="_blank"
             className="inline-flex items-center gap-2 px-6 py-3 bg-foreground text-background font-medium rounded-lg hover:bg-foreground/90 transition-colors"
           >
@@ -71,11 +74,11 @@ export function Hero() {
             LinkedIn
           </Link>
           <Link
-            href="mailto:santhoshkrishna958@gmail.com"
+            href={`mailto:${PROFILE.email}`}
             className="inline-flex items-center gap-2 px-6 py-3 border border-border text-foreground font-medium rounded-lg hover:bg-card transition-colors"
           >
             <Mail className="w-5 h-5" />
-            Get in Touch
+            Say Hello
           </Link>
         </motion.div>
 
@@ -86,7 +89,7 @@ export function Hero() {
           className="flex items-center gap-2 text-muted-foreground text-sm"
         >
           <MapPin className="w-4 h-4" />
-          Chennai, India
+          {PROFILE.location}
         </motion.div>
       </div>
 
